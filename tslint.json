@@ -12,7 +12,7 @@
     },
     "array-type": false,
     "arrow-return-shorthand": true,
-    "curly": true,
+    "curly": false,
     "deprecation": {
       "severity": "warning"
     },
@@ -43,6 +43,7 @@
         ]
       }
     ],
+    "no-trailing-whitespace": false,
     "no-console": [
       true,
       "debug",
@@ -65,7 +66,7 @@
       "as-needed"
     ],
     "quotemark": [
-      true,
+      false,
       "single"
     ],
     "semicolon": {
