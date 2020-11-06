@@ -1,23 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MaterialFileInputModule} from 'ngx-material-file-input';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {FormsModule} from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './components/app/app.component';
+import { FileImportComponent } from './components/file-import/file-import.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, FileImportComponent],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
@@ -28,9 +28,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatSnackBarModule,
     MaterialFileInputModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

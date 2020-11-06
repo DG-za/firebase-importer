@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import firebase from 'firebase';
-import {CollectionData} from './models/collection-data';
+import {CollectionData} from '../models/collection-data';
 
 @Injectable({
   providedIn: 'root'
