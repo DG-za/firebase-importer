@@ -11,7 +11,8 @@ import { FirebaseService } from '../../services/firebase.service';
 })
 export class FileImportComponent {
   configText: string;
-  data: CollectionData[];
+  jsonData: any;
+  fileData: CollectionData[];
 
   constructor(private snack: MatSnackBar, private service: FirebaseService) {}
 
@@ -20,13 +21,13 @@ export class FileImportComponent {
   }
 
   async handleData(event: any): Promise<void> {
-    const jsonData = await jsonFromFile(event.target.files[0] as File);
+    this.jsonData = await jsonFromFile(event.target.files[0] as File);
 
-    this.data = CollectionData.fromJSON(jsonData);
+    this.fileData = CollectionData.fromJSON(this.jsonData);
   }
 
   upload(): void {
-    this.service.upload(this.data);
+    this.service.upload(this.fileData);
   }
 
   cleanText(text: string): string {
@@ -37,7 +38,6 @@ export class FileImportComponent {
   }
 
   handleConfig(): void {
-    console.log('Config');
     this.configText = this.cleanText(this.configText);
   }
 }

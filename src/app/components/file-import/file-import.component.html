@@ -1,36 +1,65 @@
-<div class="text-center bg-primary" fxFill fxLayout="row" fxLayoutAlign="center center">
-  <div class="p-lg mat-elevation-z8 bg-white" fxFlex="600px" fxLayout="column" fxLayoutGap="0.5rem">
-    <h1 class="mb-md">Upload your JSON data</h1>
+<div class="text-center bg-primary" fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
+  <h1 class="text-white mb-md">Upload your JSON data</h1>
 
-    <mat-form-field floatLabel="never">
-      <mat-label>
-        apiKey:<br/>
-        authDomain:<br/>
-        databaseURL:<br/>
-        projectId:<br/>
-        storageBucket:<br/>
-        messagingSenderId:<br/>
-        appId:<br/>
-      </mat-label>
+  <div fxLayout="row" fxLayoutGap="2rem">
+    <div
+      fxLayout="column"
+      class="p-md mat-elevation-z8 bg-white"
+      fxFlex="600px"
+      fxLayoutAlign="space-between stretch"
+      fxLayoutGap="1rem"
+    >
+      <h2>Firebase config</h2>
 
-      <textarea
-        [(ngModel)]="configText"
-        (ngModelChange)="handleConfig()"
-        [rows]="8"
-        id="firebase" matInput
-        placeholder="apiKey: ...">
-      </textarea>
-    </mat-form-field>
+      <mat-form-field floatLabel="never">
+        <mat-label>
+          apiKey:<br />
+          authDomain:<br />
+          databaseURL:<br />
+          projectId:<br />
+          storageBucket:<br />
+          messagingSenderId:<br />
+          appId:<br />
+        </mat-label>
 
-    <button (click)="initFirebase()" class="mb-lg" color="primary" mat-flat-button>Initialise Firestore</button>
+        <textarea
+          [(ngModel)]="configText"
+          (ngModelChange)="handleConfig()"
+          [rows]="18"
+          id="firebase"
+          matInput
+          placeholder="apiKey: ..."
+        >
+        </textarea>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>JSON Data</mat-label>
-      <ngx-mat-file-input (change)="handleData($event)" id="json"></ngx-mat-file-input>
-      <mat-icon matSuffix>attach_file</mat-icon>
-    </mat-form-field>
+      <button (click)="upload()" color="primary" mat-flat-button>Initialise Firebase</button>
+    </div>
 
-    <button (click)="upload()" color="primary" mat-flat-button>Upload</button>
-    <p mat-card-subtitle>The database must allow writes by unauthenticated users.</p>
+    <div
+      fxLayout="column"
+      class="p-md mat-elevation-z8 bg-white"
+      fxFlex="600px"
+      fxLayoutAlign="space-between stretch"
+      fxLayoutGap="1rem"
+    >
+      <h2>Data to upload</h2>
+
+      <mat-form-field>
+        <mat-label>Select file</mat-label>
+        <ngx-mat-file-input accept=".json" (change)="handleData($event)" id="json"></ngx-mat-file-input>
+        <mat-icon matSuffix>attach_file</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> File data </mat-label>
+
+        <textarea readonly [value]="jsonData | json" id="jsonData" matInput [rows]="15"> </textarea>
+      </mat-form-field>
+
+      <button (click)="upload()" color="primary" mat-flat-button>Upload</button>
+    </div>
   </div>
+
+  <p class="text-white">The database must allow writes by unauthenticated users.</p>
 </div>
