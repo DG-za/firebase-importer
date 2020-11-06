@@ -13,9 +13,10 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { FileImportComponent } from './components/file-import/file-import.component';
+import { DataCopyComponent } from './components/data-copy/data-copy.component';
 
 @NgModule({
-  declarations: [AppComponent, FileImportComponent],
+  declarations: [AppComponent, FileImportComponent, DataCopyComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

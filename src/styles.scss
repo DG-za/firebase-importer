@@ -16,11 +16,14 @@ h1, h2, h3, h4, h5 {
 }
 
 .p-lg {
-  padding: 4rem 3rem;
+  padding: 1.5;
 }
 
 .p-md {
   padding: 1rem
+}
+.p-sm {
+  padding: 0.5rem
 }
 
 .mb-md {
@@ -45,4 +48,8 @@ h1, h2, h3, h4, h5 {
 
 .text-white {
   color: white !important;
+}
+
+.w-100 {
+  width: 100%;
 }
