@@ -1,27 +1,29 @@
-# JsonImporter
+# Firebase Importer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+This is a small, quick-and-dirty project that I created to help me:
 
-## Development server
+1. Import JSON data into Firebase
+2. Copy data between Firebase databases
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+This is the full source for an Angular app, so you can clone the repo and compile it on your side.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Limitations
 
-## Build
+The project has many limitations, including:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1. There are no unit tests
+2. There are limited options available for customisation
+3. It is not particularly user-friendly
+4. It currently requires your database to be insecure to read and write data
 
-## Running unit tests
+However, for my purposes these are shortcomings that I can live with.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Future plans
 
-## Running end-to-end tests
+At some point, I will add basic login functionality. This should allow you to add data without making your database insecure.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Merge requests
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+I'm open to any improvements from the community, so if you would like to add some functionality to the app, please feel free to submit a merge request.
