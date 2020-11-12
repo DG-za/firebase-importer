@@ -1,17 +1,29 @@
 @import '/node_modules/@angular/material/theming';
+
 @include mat-core();
 
 $primary: mat-palette($mat-indigo, 600, 500, 900);
 $accent: mat-palette($mat-pink, A400, A300, A600);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .bg-white {
   background-color: white;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   margin: 0;
 }
 
@@ -19,11 +31,16 @@ h1, h2, h3, h4, h5 {
   padding: 1.5rem;
 }
 
-.p-md {
-  padding: 1rem
+.opacity-50 {
+  opacity: 0.5;
 }
+
+.p-md {
+  padding: 1rem;
+}
+
 .p-sm {
-  padding: 0.5rem
+  padding: 0.5rem;
 }
 
 .mb-md {
@@ -60,4 +77,8 @@ h1, h2, h3, h4, h5 {
 
 .h-100 {
   height: 100%;
+}
+
+.self-start {
+  align-self: start;
 }

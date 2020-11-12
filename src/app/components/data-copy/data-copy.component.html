@@ -1,10 +1,10 @@
 <div class="text-center bg-primary" fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
-  <h1 class="text-white mb-md">Copy data between configs</h1>
+  <h1 class="text-white mb-md">Copy data between Firestores</h1>
 
   <div fxLayout="row" fxLayoutGap="2rem" class="w-100" fxLayoutAlign="center stretch">
     <div fxLayout="column" fxLayoutGap="2rem" fxFlex="30%">
-      <app-initialise-firebase name="Source"></app-initialise-firebase>
-      <app-initialise-firebase name="Target"></app-initialise-firebase>
+      <app-initialise-firebase (projectSet)="getSource($event)" name="Source"></app-initialise-firebase>
+      <app-initialise-firebase (projectSet)="getTarget($event)" name="Target"></app-initialise-firebase>
     </div>
 
     <div
@@ -13,22 +13,34 @@
       fxFlex="30%"
       fxLayoutAlign="space-between stretch"
       fxLayoutGap="1rem"
+      [class.opacity-50]="!sourceIsReady()"
     >
-      <h2>Data to upload</h2>
+      <h2>Copy setup</h2>
 
       <mat-form-field>
-        <mat-label>Select file</mat-label>
-        <ngx-mat-file-input accept=".json" (change)="handleData($event)" id="json"></ngx-mat-file-input>
-        <mat-icon matSuffix>attach_file</mat-icon>
+        <mat-label>Collection path</mat-label>
+        <input matInput [(ngModel)]="collectionPath" [required]="true" [readonly]="!sourceIsReady()" />
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label> File data </mat-label>
-
-        <textarea readonly [value]="jsonData | json" id="jsonData" matInput [rows]="15"> </textarea>
+        <mat-label>Document id</mat-label>
+        <input matInput [(ngModel)]="documentId" [required]="false" [readonly]="!sourceIsReady()" />
       </mat-form-field>
 
-      <button (click)="upload()" color="primary" mat-flat-button>Upload</button>
+      <button [disabled]="!this.fetchIsReady()" (click)="getData()" color="primary" mat-flat-button>Get data</button>
+
+      <mat-form-field>
+        <mat-label> Results </mat-label>
+
+        <textarea readonly [disabled]="!uploadIsReady()" [value]="results | json" id="jsonData" matInput [rows]="14">
+        </textarea>
+      </mat-form-field>
+
+      <mat-checkbox class="self-start" [(ngModel)]="keepIds" [disabled]="!uploadIsReady()">
+        Keep same id(s)
+      </mat-checkbox>
+
+      <button (click)="uploadData()" color="primary" mat-flat-button [disabled]="!uploadIsReady()">Add data</button>
     </div>
   </div>
 

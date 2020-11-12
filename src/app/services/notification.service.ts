@@ -19,6 +19,6 @@ export class NotificationService {
   }
 
   createSnack(text: string) {
-    this.snack.open(text);
+    this.snack.open(text, '✕', { duration: 2000 });
   }
 }

@@ -5,9 +5,7 @@ import { CollectionData } from '../models/collection-data';
 import { FirebaseOptions } from '../models/firebase-options';
 import { NotificationService } from './notification.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class FirebaseService {
   apps: firebase.app.App[] = [];
   dbs: firebase.firestore.Firestore[] = [];
@@ -18,7 +16,9 @@ export class FirebaseService {
     const db = this.getDb(projectId);
 
     for (const collection of data)
-      for (const item of collection.values) db.collection(collection.name).add(item).then(console.log);
+      for (const item of collection.values) {
+        db.collection(collection.name).add(item);
+      }
   }
 
   init(configText: string): any {
@@ -27,6 +27,18 @@ export class FirebaseService {
 
     if (existingApp) this.notify.warn('Firebase previously initialised');
     else this.initialiseFirebase(firebaseConfig);
+
+    return firebaseConfig;
+  }
+
+  getDb(projectId?: string) {
+    if (projectId) return this.dbs.find(db => db.app.name === projectId);
+    else return this.dbs[0];
+  }
+
+  getApp(projectId?: string) {
+    if (projectId) return this.apps.find(app => app.name === projectId);
+    else return this.apps[0];
   }
 
   private initialiseFirebase(firebaseConfig: FirebaseOptions) {
@@ -63,15 +75,5 @@ export class FirebaseService {
         total[key] = current;
         return total;
       }, {});
-  }
-
-  private getDb(projectId?: string) {
-    if (projectId) return this.dbs.find(db => db.app.name === projectId);
-    else return this.dbs[0];
-  }
-
-  private getApp(projectId?: string) {
-    if (projectId) return this.apps.find(app => app.name === projectId);
-    else return this.apps[0];
   }
 }

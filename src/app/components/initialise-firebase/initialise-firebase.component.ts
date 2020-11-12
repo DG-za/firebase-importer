@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { cleanVariables } from '../../helpers/helper';
+import { FirebaseOptions } from '../../models/firebase-options';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { FirebaseService } from '../../services/firebase.service';
 export class InitialiseFirebaseComponent {
   configText: string;
   @Input() name: string;
+  @Output() projectSet = new EventEmitter<FirebaseOptions>();
 
   constructor(private service: FirebaseService) {}
 
@@ -18,6 +20,7 @@ export class InitialiseFirebaseComponent {
   }
 
   initFirebase(): void {
-    this.service.init(this.configText);
+    const config = this.service.init(this.configText);
+    this.projectSet.next(config);
   }
 }

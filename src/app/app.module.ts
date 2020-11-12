@@ -15,6 +15,7 @@ import { AppComponent } from './components/app/app.component';
 import { FileImportComponent } from './components/file-import/file-import.component';
 import { DataCopyComponent } from './components/data-copy/data-copy.component';
 import { InitialiseFirebaseComponent } from './components/initialise-firebase/initialise-firebase.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [AppComponent, FileImportComponent, DataCopyComponent, InitialiseFirebaseComponent],
@@ -31,6 +32,7 @@ import { InitialiseFirebaseComponent } from './components/initialise-firebase/in
     MaterialFileInputModule,
     MatIconModule,
     FormsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent],
