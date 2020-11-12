@@ -1,36 +1,48 @@
-import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import firebase from 'firebase';
-import {CollectionData} from '../models/collection-data';
+import { Injectable } from '@angular/core';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { CollectionData } from '../models/collection-data';
+import { FirebaseOptions } from '../models/firebase-options';
+import { NotificationService } from './notification.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirebaseService {
-  db: firebase.firestore.Firestore;
+  apps: firebase.app.App[] = [];
+  dbs: firebase.firestore.Firestore[] = [];
 
-  constructor(private snack: MatSnackBar) {
-  }
+  constructor(private notify: NotificationService) {}
 
-  async upload(data: CollectionData[]): Promise<void> {
+  async upload(data: CollectionData[], projectId?: string): Promise<void> {
+    const db = this.getDb(projectId);
+
     for (const collection of data)
-      for (const item of collection.values)
-        this.db.collection(collection.name).add(item).then(console.log);
+      for (const item of collection.values) db.collection(collection.name).add(item).then(console.log);
   }
 
   init(configText: string): any {
+    const firebaseConfig = this.getFirebaseConfigFromText(configText);
+    const existingApp = this.getApp(firebaseConfig.projectId ?? ' ');
+
+    if (existingApp) this.notify.warn('Firebase previously initialised');
+    else this.initialiseFirebase(firebaseConfig);
+  }
+
+  private initialiseFirebase(firebaseConfig: FirebaseOptions) {
     try {
-      const firebaseConfig = this.getFirebaseConfigFromText(configText);
       const app = firebase.initializeApp(firebaseConfig, firebaseConfig.projectId);
-      this.db = app.firestore();
-      this.snack.open('Firebase initialised');
+      this.apps.push(app);
+      this.dbs.push(app.firestore());
+
+      this.notify.success('Firebase initialised');
       return firebaseConfig;
     } catch (e) {
-      this.snack.open(`ERROR: ${e}`);
+      this.notify.error(e);
     }
   }
 
-  private getFirebaseConfigFromText(text: string): any {
+  private getFirebaseConfigFromText(text: string): FirebaseOptions {
     const lines = text.split('\n');
     const properties = this.getPropertiesTuples(lines);
 
@@ -40,7 +52,7 @@ export class FirebaseService {
   private getPropertiesTuples(lines: string[]): [string, string][] {
     return lines.map(line => {
       const value = line.trim().split(':');
-      return [value[0], value.slice(1).join(":").trim()];
+      return [value[0], value.slice(1).join(':').trim()];
     });
   }
 
@@ -51,5 +63,15 @@ export class FirebaseService {
         total[key] = current;
         return total;
       }, {});
+  }
+
+  private getDb(projectId?: string) {
+    if (projectId) return this.dbs.find(db => db.app.name === projectId);
+    else return this.dbs[0];
+  }
+
+  private getApp(projectId?: string) {
+    if (projectId) return this.apps.find(app => app.name === projectId);
+    else return this.apps[0];
   }
 }
