@@ -5,6 +5,8 @@ This is a small, quick-and-dirty project that I created to help me:
 1. Import JSON data into Firebase
 2. Copy data between Firebase databases
 
+![screenshot](resources/screen.png)
+
 ## Usage
 
 This is the full source for an Angular app, so you can clone the repo and compile it on your side.
