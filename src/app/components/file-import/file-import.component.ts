@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { jsonFromFile } from '../../helpers/helper';
+import {cleanVariables, jsonFromFile} from '../../helpers/helper';
 import { CollectionData } from '../../models/collection-data';
 import { FirebaseService } from '../../services/firebase.service';
 
@@ -30,14 +30,7 @@ export class FileImportComponent {
     this.service.upload(this.fileData);
   }
 
-  cleanText(text: string): string {
-    return text
-      .split('\n')
-      .map(line => line.replace('" ', '').replace('",', '').replace('"', '').trim())
-      .join('\n');
-  }
-
   handleConfig(): void {
-    this.configText = this.cleanText(this.configText);
+    this.configText = cleanVariables(this.configText);
   }
 }

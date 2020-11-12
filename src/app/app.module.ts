@@ -14,9 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { FileImportComponent } from './components/file-import/file-import.component';
 import { DataCopyComponent } from './components/data-copy/data-copy.component';
+import { InitialiseFirebaseComponent } from './components/initialise-firebase/initialise-firebase.component';
 
 @NgModule({
-  declarations: [AppComponent, FileImportComponent, DataCopyComponent],
+  declarations: [AppComponent, FileImportComponent, DataCopyComponent, InitialiseFirebaseComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

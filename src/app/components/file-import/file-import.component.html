@@ -2,39 +2,7 @@
   <h1 class="text-white mb-md">Upload your JSON data</h1>
 
   <div fxLayout="row" fxLayoutGap="2rem" class="w-100" fxLayoutAlign="center stretch">
-    <div
-      fxLayout="column"
-      class="p-md mat-elevation-z8 bg-white"
-      fxFlex="30%"
-      fxLayoutAlign="space-between stretch"
-      fxLayoutGap="1rem"
-    >
-      <h2>Firebase config</h2>
-
-      <mat-form-field floatLabel="never">
-        <mat-label>
-          apiKey:<br />
-          authDomain:<br />
-          databaseURL:<br />
-          projectId:<br />
-          storageBucket:<br />
-          messagingSenderId:<br />
-          appId:<br />
-        </mat-label>
-
-        <textarea
-          [(ngModel)]="configText"
-          (ngModelChange)="handleConfig()"
-          [rows]="18"
-          id="firebase"
-          matInput
-          placeholder="apiKey: ..."
-        >
-        </textarea>
-      </mat-form-field>
-
-      <button (click)="upload()" color="primary" mat-flat-button>Initialise Firebase</button>
-    </div>
+    <app-initialise-firebase fxFlex="30%" name="Source" class="h-100"></app-initialise-firebase>
 
     <div
       fxLayout="column"
