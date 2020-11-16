@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { cleanVariables } from '../../helpers/helper';
 import { CollectionData } from '../../models/collection-data';
+import { CollectionDocumentPath } from '../../models/collection-document-path';
 import { FirebaseOptions } from '../../models/firebase-options';
 import { CopierService } from '../../services/copier.service';
 import { FirebaseService } from '../../services/firebase.service';
@@ -24,35 +25,34 @@ export class DataCopyComponent {
 
   constructor(private service: FirebaseService, private copier: CopierService, private notify: NotificationService) {}
 
+  get isMultipleDocs() {
+    return !this.documentId;
+  }
+
   initFirebase(): void {
     this.service.init(this.configText);
   }
 
-  async getData(): Promise<void> {
+  async getData(collectionDoc: CollectionDocumentPath): Promise<void> {
+    this.collectionPath = collectionDoc.collection;
+    this.documentId = collectionDoc.document;
+
     this.results = await this.copier.fetchData(this.source.projectId, this.collectionPath, this.documentId);
   }
 
   async uploadData() {
     let promise: Promise<any>;
 
-    if (this.isMultipleDocs) promise = this.uploadMultiple();
-    else promise = this.uploadSingle();
+    if (this.isMultipleDocs) {
+      promise = this.uploadMultiple();
+    } else {
+      promise = this.uploadSingle();
+    }
 
     promise.then(_ => this.notify.success('Upload complete')).catch(e => this.notify.error(e));
 
     this.results = undefined;
     this.collectionPath = undefined;
-  }
-
-  private async uploadSingle() {
-    if (this.keepIds)
-      return this.copier.setItem(this.results, this.target.projectId, this.collectionPath, this.results.id);
-    else return this.copier.addItem(this.results, this.target.projectId, this.collectionPath);
-  }
-
-  private async uploadMultiple() {
-    if (this.keepIds) return this.copier.setItems(this.results, this.target.projectId, this.collectionPath);
-    else return this.copier.addItems(this.results, this.target.projectId, this.collectionPath);
   }
 
   handleConfig(): void {
@@ -71,15 +71,23 @@ export class DataCopyComponent {
     return !!this.source;
   }
 
-  fetchIsReady() {
-    return this.sourceIsReady() && !!this.collectionPath;
-  }
-
   uploadIsReady() {
     return !!this.results && !!this.target;
   }
 
-  get isMultipleDocs() {
-    return !this.documentId;
+  private async uploadSingle() {
+    if (this.keepIds) {
+      return this.copier.setItem(this.results, this.target.projectId, this.collectionPath, this.results.id);
+    } else {
+      return this.copier.addItem(this.results, this.target.projectId, this.collectionPath);
+    }
+  }
+
+  private async uploadMultiple() {
+    if (this.keepIds) {
+      return this.copier.setItems(this.results, this.target.projectId, this.collectionPath);
+    } else {
+      return this.copier.addItems(this.results, this.target.projectId, this.collectionPath);
+    }
   }
 }

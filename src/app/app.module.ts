@@ -3,6 +3,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,14 +12,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AppRoutingModule } from './app-routing.module';
+import { AddDataComponent } from './components/add-data/add-data.component';
 import { AppComponent } from './components/app/app.component';
-import { FileImportComponent } from './components/file-import/file-import.component';
 import { DataCopyComponent } from './components/data-copy/data-copy.component';
+import { DocumentSelectorComponent } from './components/document-selector/document-selector.component';
+import { DownloadComponent } from './components/download/download.component';
+import { FileImportComponent } from './components/file-import/file-import.component';
 import { InitialiseFirebaseComponent } from './components/initialise-firebase/initialise-firebase.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [AppComponent, FileImportComponent, DataCopyComponent, InitialiseFirebaseComponent],
+  declarations: [
+    AppComponent,
+    FileImportComponent,
+    DataCopyComponent,
+    InitialiseFirebaseComponent,
+    DownloadComponent,
+    AddDataComponent,
+    DocumentSelectorComponent,
+  ],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -32,7 +43,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MaterialFileInputModule,
     MatIconModule,
     FormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,46 +1,38 @@
 <div class="text-center bg-primary" fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
   <h1 class="text-white mb-md">Copy data between Firestores</h1>
 
-  <div fxLayout="row" fxLayoutGap="2rem" class="w-100" fxLayoutAlign="center stretch">
-    <div fxLayout="column" fxLayoutGap="2rem" fxFlex="30%">
+  <div class="w-100" fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="2rem">
+    <div fxFlex="30%" fxLayout="column" fxLayoutGap="2rem">
       <app-initialise-firebase (projectSet)="getSource($event)" name="Source"></app-initialise-firebase>
       <app-initialise-firebase (projectSet)="getTarget($event)" name="Target"></app-initialise-firebase>
     </div>
 
     <div
-      fxLayout="column"
-      class="p-md mat-elevation-z8 bg-white"
-      fxFlex="30%"
-      fxLayoutAlign="space-between stretch"
-      fxLayoutGap="1rem"
       [class.opacity-50]="!sourceIsReady()"
+      fxFlex="30%"
+      fxLayout="column"
+      fxLayoutAlign="space-between stretch"
+      fxLayoutGap="2rem"
     >
-      <h2>Copy setup</h2>
+      <app-document-selector
+        (buttonClicked)="getData($event)"
+        [disabled]="!sourceIsReady()"
+      ></app-document-selector>
 
-      <mat-form-field>
-        <mat-label>Collection path</mat-label>
-        <input matInput [(ngModel)]="collectionPath" [required]="true" [readonly]="!sourceIsReady()" />
-      </mat-form-field>
+      <div class="mat-elevation-z8 bg-white p-md" fxLayout="column" fxLayoutGap="1rem">
+        <mat-form-field>
+          <mat-label> Results</mat-label>
 
-      <mat-form-field>
-        <mat-label>Document id</mat-label>
-        <input matInput [(ngModel)]="documentId" [required]="false" [readonly]="!sourceIsReady()" />
-      </mat-form-field>
+          <textarea [disabled]="!uploadIsReady()" [rows]="11" [value]="results | json" id="jsonData" matInput readonly>
+          </textarea>
+        </mat-form-field>
 
-      <button [disabled]="!this.fetchIsReady()" (click)="getData()" color="primary" mat-flat-button>Get data</button>
+        <mat-checkbox [(ngModel)]="keepIds" [disabled]="!uploadIsReady()" class="self-start">
+          Keep same id(s)
+        </mat-checkbox>
 
-      <mat-form-field>
-        <mat-label> Results </mat-label>
-
-        <textarea readonly [disabled]="!uploadIsReady()" [value]="results | json" id="jsonData" matInput [rows]="14">
-        </textarea>
-      </mat-form-field>
-
-      <mat-checkbox class="self-start" [(ngModel)]="keepIds" [disabled]="!uploadIsReady()">
-        Keep same id(s)
-      </mat-checkbox>
-
-      <button (click)="uploadData()" color="primary" mat-flat-button [disabled]="!uploadIsReady()">Add data</button>
+        <button (click)="uploadData()" [disabled]="!uploadIsReady()" color="primary" mat-flat-button>Copy data to target</button>
+      </div>
     </div>
   </div>
 

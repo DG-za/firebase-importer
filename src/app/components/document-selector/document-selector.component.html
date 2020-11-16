@@ -1,0 +1,20 @@
+<div
+  fxLayout="column"
+  class="p-md mat-elevation-z8 bg-white h-100"
+  fxLayoutAlign="space-between stretch"
+  fxLayoutGap="1rem"
+>
+  <h2>{{ title }}</h2>
+
+  <mat-form-field>
+    <mat-label>Collection path</mat-label>
+    <input matInput [(ngModel)]="collectionPath" [required]="true" [readonly]="disabled" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Document id</mat-label>
+    <input matInput [(ngModel)]="documentId" [required]="false" [readonly]="disabled" />
+  </mat-form-field>
+
+  <button [disabled]="!this.isReady()" (click)="emitData()" color="primary" mat-flat-button>{{ buttonText }}</button>
+</div>

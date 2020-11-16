@@ -1,0 +1,36 @@
+<div class="text-center bg-primary" fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
+  <h1 class="text-white mb-md">Download JSON data</h1>
+
+  <div class="w-100" fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="2rem">
+    <app-initialise-firebase
+      (projectSet)="getFirebase($event)"
+      class="h-100"
+      fxFlex="30%"
+      name="Firestore"
+    ></app-initialise-firebase>
+
+    <div
+      [class.opacity-50]="!firestoreIsReady()"
+      fxFlex="30%"
+      fxLayout="column"
+      fxLayoutAlign="space-between stretch"
+      fxLayoutGap="2rem"
+    >
+      <app-document-selector (buttonClicked)="getData($event)" [disabled]="!firestoreIsReady()"></app-document-selector>
+
+      <div class="mat-elevation-z8 bg-white p-md" fxLayout="column" fxLayoutGap="1rem">
+        <mat-form-field>
+          <mat-label> Results</mat-label>
+
+          <textarea [rows]="11" [value]="results | json" id="jsonData" matInput readonly></textarea>
+        </mat-form-field>
+
+        <button (click)="downloadData()" [disabled]="!downloadIsReady()" color="primary" mat-flat-button>
+          Save as JSON
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-white">The database must allow writes by unauthenticated users.</p>
+</div>
