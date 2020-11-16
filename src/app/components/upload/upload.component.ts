@@ -6,10 +6,10 @@ import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-file-import',
-  templateUrl: './file-import.component.html',
-  styleUrls: ['./file-import.component.css'],
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.css'],
 })
-export class FileImportComponent {
+export class UploadComponent {
   configText: string;
   jsonData: any;
   fileData: CollectionData[];

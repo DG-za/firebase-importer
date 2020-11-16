@@ -12,22 +12,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AppRoutingModule } from './app-routing.module';
-import { AddDataComponent } from './components/add-data/add-data.component';
 import { AppComponent } from './components/app/app.component';
 import { DataCopyComponent } from './components/data-copy/data-copy.component';
 import { DocumentSelectorComponent } from './components/document-selector/document-selector.component';
 import { DownloadComponent } from './components/download/download.component';
-import { FileImportComponent } from './components/file-import/file-import.component';
+import { UploadComponent } from './components/upload/upload.component';
 import { InitialiseFirebaseComponent } from './components/initialise-firebase/initialise-firebase.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileImportComponent,
+    UploadComponent,
     DataCopyComponent,
     InitialiseFirebaseComponent,
     DownloadComponent,
-    AddDataComponent,
     DocumentSelectorComponent,
   ],
   imports: [
