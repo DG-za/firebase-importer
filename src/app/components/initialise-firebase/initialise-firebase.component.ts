@@ -10,6 +10,7 @@ import { FirebaseService } from '../../services/firebase.service';
 })
 export class InitialiseFirebaseComponent {
   configText: string;
+  config?: FirebaseOptions;
   @Input() name: string;
   @Output() projectSet = new EventEmitter<FirebaseOptions>();
 
@@ -20,7 +21,11 @@ export class InitialiseFirebaseComponent {
   }
 
   initFirebase(): void {
-    const config = this.service.init(this.configText);
-    this.projectSet.next(config);
+    this.config = this.service.init(this.configText);
+    this.projectSet.next(this.config);
+  }
+
+  login(): void {
+    if (this.config) this.service.login(this.config.projectId);
   }
 }

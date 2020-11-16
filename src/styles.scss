@@ -43,11 +43,19 @@ h5 {
   padding: 0.5rem;
 }
 
+.ml-sm {
+  margin-left: 0.5rem !important;
+}
+
 .mb-md {
-  margin-bottom: 2rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .mb-lg {
+  margin-bottom: 2rem !important;
+}
+
+.mb-xl {
   margin-bottom: 4rem !important;
 }
 
@@ -81,4 +89,8 @@ h5 {
 
 .self-start {
   align-self: start;
+}
+
+.border-top {
+  border-top: #e7ebef 1px solid;
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DataCopyComponent } from './components/data-copy/data-copy.component';
-import { DownloadComponent } from './components/download/download.component';
-import { UploadComponent } from './components/upload/upload.component';
+import { DataCopyComponent } from '../components/data-copy/data-copy.component';
+import { DownloadComponent } from '../components/download/download.component';
+import { UploadComponent } from '../components/upload/upload.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'download' },

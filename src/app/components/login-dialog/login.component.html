@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="1rem" class="w-100 p-md">
+  <form fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input [(ngModel)]="email" email matInput name="email" required type="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input [(ngModel)]="password" matInput minlength="6" name="password" required type="password" />
+    </mat-form-field>
+
+    <button (click)="signInWithEmail()" color="accent" mat-raised-button [disabled]="(loading$ | async)">
+      <span fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner *ngIf="loading$ | async" [diameter]="24" color="accent"></mat-spinner>
+        <span class="ml-sm">Sign In</span>
+      </span>
+    </button>
+  </form>
+
+  <mat-hint align="start" class="mat-small text-center">Or continue with your preferred account</mat-hint>
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1rem">
+    <button (click)="signInWithFacebook()" class="icon-border" mat-button mat-icon-button>
+      <fa-icon [icon]="['fab', 'facebook-f']" class="color-facebook" stackItemSize="1x"></fa-icon>
+    </button>
+
+    <button (click)="signInWithGoogle()" class="icon-border" mat-button mat-icon-button>
+      <fa-icon [icon]="['fab', 'google']" class="color-google" stackItemSize="1x"></fa-icon>
+    </button>
+
+    <button (click)="signInWithTwitter()" class="icon-border" mat-button mat-icon-button>
+      <fa-icon [icon]="['fab', 'twitter']" class="color-twitter" stackItemSize="1x"></fa-icon>
+    </button>
+
+    <button (click)="signInWithGithub()" class="icon-border" mat-button mat-icon-button>
+      <fa-icon [icon]="['fab', 'github']" class="color-github" stackItemSize="1x"></fa-icon>
+    </button>
+  </div>
+</div>

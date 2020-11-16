@@ -21,7 +21,7 @@
       <textarea
         [(ngModel)]="configText"
         (ngModelChange)="handleConfig()"
-        [rows]="8"
+        [rows]="9"
         id="source"
         matInput
         placeholder="apiKey: ..."
@@ -30,5 +30,8 @@
     </mat-form-field>
 
     <button (click)="initFirebase()" color="primary" mat-flat-button>Initialise {{ name | lowercase }}</button>
+    <button (click)="login()" color="primary" mat-flat-button [disabled]="!config">
+      Authenticate {{ name | lowercase }}
+    </button>
   </div>
 </div>
