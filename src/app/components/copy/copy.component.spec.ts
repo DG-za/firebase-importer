@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataCopyComponent } from './data-copy.component';
+import { CopyComponent } from './copy.component';
 
 describe('DataCopyComponent', () => {
-  let component: DataCopyComponent;
-  let fixture: ComponentFixture<DataCopyComponent>;
+  let component: CopyComponent;
+  let fixture: ComponentFixture<CopyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DataCopyComponent ]
+      declarations: [ CopyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataCopyComponent);
+    fixture = TestBed.createComponent(CopyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

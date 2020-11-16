@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { AppComponent } from './components/app/app.component';
-import { DataCopyComponent } from './components/data-copy/data-copy.component';
+import { CopyComponent } from './components/copy/copy.component';
 import { DocumentSelectorComponent } from './components/document-selector/document-selector.component';
 import { DownloadComponent } from './components/download/download.component';
 import { InitialiseFirebaseComponent } from './components/initialise-firebase/initialise-firebase.component';
@@ -27,7 +27,7 @@ import { FontAwesomeModule } from "./modules/font-awesome.module";
   declarations: [
     AppComponent,
     UploadComponent,
-    DataCopyComponent,
+    CopyComponent,
     InitialiseFirebaseComponent,
     DownloadComponent,
     DocumentSelectorComponent,

@@ -9,10 +9,10 @@ import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-data-copy',
-  templateUrl: './data-copy.component.html',
-  styleUrls: ['./data-copy.component.css'],
+  templateUrl: './copy.component.html',
+  styleUrls: ['./copy.component.css'],
 })
-export class DataCopyComponent {
+export class CopyComponent {
   configText: string;
   results: any;
   fileData: CollectionData[];
