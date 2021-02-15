@@ -3,6 +3,7 @@
 This is a small, quick-and-dirty project that I created to help me:
 
 1. Import JSON data into Firebase
+2. Download JSON data from Firebase
 2. Copy data between Firebase databases
 
 ![screenshot](resources/screen.png)
@@ -18,13 +19,9 @@ The project has many limitations, including:
 1. There are no unit tests
 2. There are limited options available for customisation
 3. It is not particularly user-friendly
-4. It currently requires your database to be insecure to read and write data
+4. It currently requires the logged-in user to have full read / write capabilities for your database(s)
 
 However, for my purposes these are shortcomings that I can live with.
-
-## Future plans
-
-At some point, I will add basic login functionality. This should allow you to add data without making your database insecure.
 
 ## Merge requests
 
