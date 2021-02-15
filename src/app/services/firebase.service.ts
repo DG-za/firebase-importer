@@ -5,6 +5,7 @@ import 'firebase/firestore';
 import { LoginComponent } from '../components/login-dialog/login.component';
 import { CollectionData } from '../models/collection-data';
 import { FirebaseOptions } from '../models/firebase-options';
+import { UploadOptions } from '../models/upload-options';
 import { NotificationService } from './notification.service';
 
 @Injectable({ providedIn: 'root' })
@@ -14,12 +15,15 @@ export class FirebaseService {
 
   constructor(private notify: NotificationService, private dialog: MatDialog) {}
 
-  async upload(data: CollectionData[], projectId?: string): Promise<void> {
-    const db = this.getDb(projectId);
+  async upload(data: CollectionData[], options: UploadOptions = {}): Promise<void> {
+    const db = this.getDb(options?.projectId);
 
     for (const collection of data)
       for (const item of collection.values) {
-        db.collection(collection.name).add(item);
+        const path = this.buildCollectionPath(options.collectionName ?? collection.name, options.parentPath);
+
+        if (options.documentId) db.collection(path).doc(options.documentId).set(item);
+        else db.collection(path).add(item);
       }
   }
 
@@ -83,5 +87,9 @@ export class FirebaseService {
         total[key] = current;
         return total;
       }, {});
+  }
+
+  private buildCollectionPath(collectionName: string, parentPath?: string) {
+    return parentPath ? `${parentPath}/${collectionName}` : collectionName;
   }
 }

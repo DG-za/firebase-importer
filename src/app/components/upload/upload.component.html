@@ -20,6 +20,16 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label>Parent path (optional)</mat-label>
+        <input matInput [(ngModel)]="parentPath" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Document id (optional)</mat-label>
+        <input matInput [(ngModel)]="documentId" />
+      </mat-form-field>
+
+      <mat-form-field>
         <mat-label> File data </mat-label>
 
         <textarea readonly [value]="jsonData | json" id="jsonData" matInput [rows]="15"> </textarea>

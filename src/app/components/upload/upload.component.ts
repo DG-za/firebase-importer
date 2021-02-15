@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {cleanVariables, jsonFromFile} from '../../helpers/helper';
+import { cleanVariables, jsonFromFile } from '../../helpers/helper';
 import { CollectionData } from '../../models/collection-data';
 import { FirebaseService } from '../../services/firebase.service';
 
@@ -13,6 +13,8 @@ export class UploadComponent {
   configText: string;
   jsonData: any;
   fileData: CollectionData[];
+  parentPath: string;
+  documentId: string;
 
   constructor(private snack: MatSnackBar, private service: FirebaseService) {}
 
@@ -27,7 +29,7 @@ export class UploadComponent {
   }
 
   upload(): void {
-    this.service.upload(this.fileData);
+    this.service.upload(this.fileData, { parentPath: this.parentPath, documentId: this.documentId });
   }
 
   handleConfig(): void {
