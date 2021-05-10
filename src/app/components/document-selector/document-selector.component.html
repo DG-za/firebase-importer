@@ -9,12 +9,34 @@
   <mat-form-field>
     <mat-label>Collection path</mat-label>
     <input matInput [(ngModel)]="collectionPath" [required]="true" [readonly]="disabled" />
+    <mat-hint align="end" class="cursor-click" (click)="showQuery = !showQuery">{{
+      showQuery ? 'Select document ' : 'Query collection'
+    }}</mat-hint>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="!showQuery">
     <mat-label>Document id</mat-label>
     <input matInput [(ngModel)]="documentId" [required]="false" [readonly]="disabled" />
   </mat-form-field>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem" *ngIf="showQuery">
+    <mat-form-field fxFlex="2 2 100">
+      <mat-label>Field</mat-label>
+      <input matInput [required]="true" [(ngModel)]="query.field" />
+    </mat-form-field>
+
+    <mat-form-field fxFlex="1 1 100">
+      <mat-label>Operator</mat-label>
+      <mat-select [(ngModel)]="query.operator" [required]="true">
+        <mat-option *ngFor="let operator of queryOperators" [value]="operator">{{ operator }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="2 2 100">
+      <mat-label>Value</mat-label>
+      <input matInput [(ngModel)]="query.value" [required]="true" />
+    </mat-form-field>
+  </div>
 
   <button [disabled]="!this.isReady()" (click)="emitData()" color="primary" mat-flat-button>{{ buttonText }}</button>
 </div>

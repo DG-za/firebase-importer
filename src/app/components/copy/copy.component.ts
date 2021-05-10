@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { cleanVariables } from '../../helpers/helper';
 import { CollectionData } from '../../models/collection-data';
-import { CollectionDocumentPath } from '../../models/collection-document-path';
+import { CollectionDocumentQuery } from '../../models/collection-document-query';
 import { FirebaseOptions } from '../../models/firebase-options';
+import { Query } from '../../models/query';
 import { CopierService } from '../../services/copier.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { NotificationService } from '../../services/notification.service';
@@ -22,6 +23,7 @@ export class CopyComponent {
 
   target: FirebaseOptions;
   source: FirebaseOptions;
+  query: Query;
 
   constructor(private service: FirebaseService, private copier: CopierService, private notify: NotificationService) {}
 
@@ -33,11 +35,12 @@ export class CopyComponent {
     this.service.init(this.configText);
   }
 
-  async getData(collectionDoc: CollectionDocumentPath): Promise<void> {
+  async getData(collectionDoc: CollectionDocumentQuery): Promise<void> {
     this.collectionPath = collectionDoc.collection;
     this.documentId = collectionDoc.document;
+    this.query = collectionDoc.query;
 
-    this.results = await this.copier.fetchData(this.source.projectId, this.collectionPath, this.documentId);
+    this.results = await this.copier.fetchData(this.source.projectId, this.collectionPath, this.documentId, this.query);
   }
 
   async uploadData() {

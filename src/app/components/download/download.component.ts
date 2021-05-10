@@ -3,8 +3,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { saveAs } from 'file-saver';
 import { cleanVariables, jsonFromFile } from '../../helpers/helper';
 import { CollectionData } from '../../models/collection-data';
-import { CollectionDocumentPath } from '../../models/collection-document-path';
+import { CollectionDocumentQuery } from '../../models/collection-document-query';
 import { FirebaseOptions } from '../../models/firebase-options';
+import { Query } from '../../models/query';
 import { CopierService } from '../../services/copier.service';
 import { FirebaseService } from '../../services/firebase.service';
 
@@ -20,6 +21,7 @@ export class DownloadComponent {
   firestore: FirebaseOptions;
   collectionPath?: string;
   documentId?: string;
+  query?: Query;
   results: any;
 
   constructor(private snack: MatSnackBar, private service: FirebaseService, private copier: CopierService) {}
@@ -42,14 +44,16 @@ export class DownloadComponent {
     return !!this.firestore;
   }
 
-  async getData(collectionDoc: CollectionDocumentPath): Promise<void> {
+  async getData(collectionDoc: CollectionDocumentQuery): Promise<void> {
     this.collectionPath = collectionDoc.collection;
     this.documentId = collectionDoc.document;
+    this.query = collectionDoc.query;
 
     this.results = await this.copier.fetchData(
       this.firestore.projectId,
       collectionDoc.collection,
-      collectionDoc.document
+      collectionDoc.document,
+      this.query
     );
   }
 

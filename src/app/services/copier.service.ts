@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import 'firebase/firestore';
+import { Query } from '../models/query';
 import { FirebaseService } from './firebase.service';
 import CollectionReference = firebase.firestore.CollectionReference;
 import DocumentData = firebase.firestore.DocumentData;
@@ -10,19 +11,23 @@ import DocumentReference = firebase.firestore.DocumentReference;
 export class CopierService {
   constructor(private fbService: FirebaseService) {}
 
-  fetchData(projectId: string, collectionPath: string, docId?: string) {
+  fetchData(projectId: string, collectionPath: string, docId?: string, query?: Query) {
     const db = this.fbService.getDb(projectId);
     const collection = db.collection(collectionPath);
 
     if (docId) return this.getFromDocument(collection, docId);
+    else if (query) return this.getFromQuery(collection, query);
     else return this.getFromCollection(collection);
   }
 
   private async getFromCollection(collection: CollectionReference<DocumentData>) {
     const results = await collection.get();
-    return results.docs.map(result => {
-      return { id: result.id, ...result.data() };
-    });
+    return results.docs.map(result => ({ id: result.id, ...result.data() }));
+  }
+
+  private async getFromQuery(collection: CollectionReference<DocumentData>, query: Query) {
+    const results = await collection.where(query.field, query.operator, query.value).get();
+    return results.docs.map(result => ({ id: result.id, ...result.data() }));
   }
 
   private async getFromDocument(collection: CollectionReference<DocumentData>, docId: string) {
