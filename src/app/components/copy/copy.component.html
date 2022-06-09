@@ -14,16 +14,27 @@
       fxLayoutAlign="end stretch"
       fxLayoutGap="2rem"
     >
-      <app-document-selector
-        (buttonClicked)="getData($event)"
-        [disabled]="!sourceIsReady()"
-      ></app-document-selector>
+      <app-document-selector (buttonClicked)="getData($event)" [disabled]="!sourceIsReady()"></app-document-selector>
+
+      <div
+        fxLayout="column"
+        class="p-md mat-elevation-z8 bg-white h-100"
+        fxLayoutAlign="space-between stretch"
+        fxLayoutGap="1rem"
+      >
+        <h2>Set target</h2>
+
+        <mat-form-field>
+          <mat-label>Collection path</mat-label>
+          <input matInput [(ngModel)]="targetPath" [required]="true" [readonly]="!collectionPath" />
+        </mat-form-field>
+      </div>
 
       <div class="mat-elevation-z8 bg-white p-md" fxLayout="column" fxLayoutGap="1rem">
         <mat-form-field>
           <mat-label> Results</mat-label>
 
-          <textarea [disabled]="!uploadIsReady()" [rows]="11" [value]="results | json" id="jsonData" matInput readonly>
+          <textarea [disabled]="!uploadIsReady()" [rows]="8" [value]="results | json" id="jsonData" matInput readonly>
           </textarea>
         </mat-form-field>
 
@@ -31,7 +42,9 @@
           Keep same id(s)
         </mat-checkbox>
 
-        <button (click)="uploadData()" [disabled]="!uploadIsReady()" color="primary" mat-flat-button>Copy data to target</button>
+        <button (click)="uploadData()" [disabled]="!uploadIsReady()" color="primary" mat-flat-button
+          >Copy data to target</button
+        >
       </div>
     </div>
   </div>
