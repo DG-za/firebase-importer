@@ -31,7 +31,7 @@
       </div>
 
       <div class="mat-elevation-z8 bg-white p-md" fxLayout="column" fxLayoutGap="1rem">
-        <mat-form-field>
+        <mat-form-field *ngIf="showJson">
           <mat-label> Results</mat-label>
 
           <textarea [disabled]="!uploadIsReady()" [rows]="8" [value]="results | json" id="jsonData" matInput readonly>
@@ -42,9 +42,11 @@
           Keep same id(s)
         </mat-checkbox>
 
-        <button (click)="uploadData()" [disabled]="!uploadIsReady()" color="primary" mat-flat-button
-          >Copy data to target</button
-        >
+        <mat-checkbox [(ngModel)]="showJson" class="self-start"> Show JSON </mat-checkbox>
+
+        <button (click)="uploadData()" [disabled]="!uploadIsReady()" color="primary" mat-flat-button>
+          Copy data to target
+        </button>
       </div>
     </div>
   </div>

@@ -21,6 +21,7 @@ export class CopyComponent {
   targetPath: string;
   documentId: string;
   keepIds = false;
+  showJson = true;
 
   target: FirebaseOptions;
   source: FirebaseOptions;
