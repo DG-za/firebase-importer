@@ -18,6 +18,7 @@ export class CopyComponent {
   results: any;
   fileData: CollectionData[];
   collectionPath: string;
+  targetPath: string;
   documentId: string;
   keepIds = false;
   showJson = true;
@@ -38,6 +39,7 @@ export class CopyComponent {
 
   async getData(collectionDoc: CollectionDocumentQuery): Promise<void> {
     this.collectionPath = collectionDoc.collection;
+    this.targetPath ??= this.collectionPath;
     this.documentId = collectionDoc.document;
     this.query = collectionDoc.query;
 
@@ -80,18 +82,12 @@ export class CopyComponent {
   }
 
   private async uploadSingle() {
-    if (this.keepIds) {
-      return this.copier.setItem(this.results, this.target.projectId, this.collectionPath, this.results.id);
-    } else {
-      return this.copier.addItem(this.results, this.target.projectId, this.collectionPath);
-    }
+    if (this.keepIds) return this.copier.setItem(this.results, this.target.projectId, this.targetPath, this.results.id);
+    else return this.copier.addItem(this.results, this.target.projectId, this.targetPath);
   }
 
   private async uploadMultiple() {
-    if (this.keepIds) {
-      return this.copier.setItems(this.results, this.target.projectId, this.collectionPath);
-    } else {
-      return this.copier.addItems(this.results, this.target.projectId, this.collectionPath);
-    }
+    if (this.keepIds) return this.copier.setItems(this.results, this.target.projectId, this.targetPath);
+    else return this.copier.addItems(this.results, this.target.projectId, this.targetPath);
   }
 }

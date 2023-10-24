@@ -1,4 +1,4 @@
-<div class="text-center bg-primary" fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
+<div class="bg-primary" fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
   <h1 class="text-white mb-lg">Copy data between Firestores</h1>
 
   <div class="w-100" fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="2rem">
@@ -16,11 +16,25 @@
     >
       <app-document-selector (buttonClicked)="getData($event)" [disabled]="!sourceIsReady()"></app-document-selector>
 
+      <div
+        fxLayout="column"
+        class="p-md mat-elevation-z8 bg-white h-100"
+        fxLayoutAlign="space-between stretch"
+        fxLayoutGap="1rem"
+      >
+        <h3>Set target</h3>
+
+        <mat-form-field>
+          <mat-label>Collection path</mat-label>
+          <input matInput [(ngModel)]="targetPath" [required]="true" [readonly]="!collectionPath" />
+        </mat-form-field>
+      </div>
+
       <div class="mat-elevation-z8 bg-white p-md" fxLayout="column" fxLayoutGap="1rem">
         <mat-form-field *ngIf="showJson">
           <mat-label> Results</mat-label>
 
-          <textarea [disabled]="!uploadIsReady()" [rows]="11" [value]="results | json" id="jsonData" matInput readonly>
+          <textarea [disabled]="!uploadIsReady()" [rows]="7" [value]="results | json" id="jsonData" matInput readonly>
           </textarea>
         </mat-form-field>
 
