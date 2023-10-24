@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import { LoginComponent } from '../components/login-dialog/login.component';
 import { CollectionData } from '../models/collection-data';
 import { FirebaseOptions } from '../models/firebase-options';
